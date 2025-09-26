@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +30,8 @@
             margin-bottom: 1.5rem;
         }
 
-        .toggle-container, .slider-container {
+        .toggle-container,
+        .slider-container {
             margin-bottom: 1.5rem;
             text-align: center;
         }
@@ -77,6 +79,30 @@
 
         .pricing-card.popular-card {
             border: 2px solid #28a745;
+        }
+
+        .bullet-points {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #34495e;
+        }
+
+        .bullet-points li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .bullet-points li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-size: 1.25rem;
+            line-height: 1.2;
         }
 
         .btn-primary {
@@ -203,6 +229,7 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Choose Your Plan</h1>
     <div class="toggle-container">
@@ -222,29 +249,43 @@
             <h3>Starter</h3>
             <div class="price" id="starterPrice">$0 <span>/ month</span></div>
             <button class="btn btn-primary">Select Plan</button>
-            <br />
-            <p>Take our Annual Training</p>
+            <ul class="bullet-points">
+                <li>Annual Cybersecurity Training</li>
+                <li>Baseline Employee Cybersecurity Assessment</li>
+                <li>Dark Web Searches</li>
+            </ul>
         </div>
         <div class="pricing-card">
             <h3>Basic</h3>
             <div class="price" id="basicPrice">$100 <span>/ month</span></div>
             <button class="btn btn-primary">Select Plan</button>
             <br />
-            <p>Get your users trained and certified to meet regulatory requirements</p>
+            <ul class="bullet-points">
+                <li>Annual Cybersecurity Certification</li>
+                <li>Additional Assessments</li>
+                <li>Easy User Management</li>
+            </ul>
         </div>
         <div class="pricing-card popular-card">
             <h3>Pro <span class="badge bg-success ms-2">Most Popular</span></h3>
             <div class="price" id="proPrice">$175 <span>/ month</span></div>
             <button class="btn btn-primary">Select Plan</button>
             <br />
-            <p>Take the next step to user empowerment</p>
+            <ul class="bullet-points">
+                <li>Bonus Training and Certifications</li>
+                <li>Enhanced Dark Web Monitoring</li>
+                <li>Phishing Simulation + Catch-Phish&copy; </li>
+            </ul>
         </div>
         <div class="pricing-card">
             <h3>Enterprise</h3>
             <div class="price" id="enterprisePrice">$200 <span>/ month</span></div>
             <button class="btn btn-primary">Select Plan</button>
             <br />
-            <p>The best user-training available, all included</p>
+            <ul class="bullet-points">
+                <li>All Training and Certifications</li>
+                <li>Learning Paths (new)</li>
+            </ul>
         </div>
     </div>
     <table class="comparison-table table table-bordered">
@@ -280,10 +321,12 @@
                 <td class="checkmark">✔</td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Refreshed every year with new information and adventures, follow Agent Coyle as he navigates the world of Cybersecurity threats">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Refreshed every year with new information and adventures, follow Agent Coyle as he navigates the world of Cybersecurity threats">
                     Annual Cybersecurity Certification <i class="fa-solid fa-circle-info"></i>
                 </td>
-                <td><i class="fa-solid fa-circle-info" data-bs-toggle="tooltip" data-bs-title="Training available without certification"></i></td>
+                <td><i class="fa-solid fa-circle-info" data-bs-toggle="tooltip"
+                        data-bs-title="Training available without certification"></i></td>
                 <td class="checkmark">✔</td>
                 <td class="checkmark">✔</td>
                 <td class="checkmark">✔</td>
@@ -294,7 +337,8 @@
                 </td>
                 <td></td>
                 <td></td>
-                <td class="checkmark" data-bs-toggle="tooltip" data-bs-title="Boost productivity with Pro"><i class="fa-solid fa-circle-check"></i></td>
+                <td class="checkmark" data-bs-toggle="tooltip" data-bs-title="Boost productivity with Pro"><i
+                        class="fa-solid fa-circle-check"></i></td>
                 <td class="checkmark">✔</td>
             </tr>
             <tr>
@@ -304,10 +348,12 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="checkmark" data-bs-toggle="tooltip" data-bs-title="Exclusive AI training"><i class="fa-solid fa-circle-check"></i></td>
+                <td class="checkmark" data-bs-toggle="tooltip" data-bs-title="Exclusive AI training"><i
+                        class="fa-solid fa-circle-check"></i></td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Cybersecurity training with a HIPAA focus">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Cybersecurity training with a HIPAA focus">
                     HIPAA Certification <i class="fa-solid fa-circle-info"></i>
                 </td>
                 <td></td>
@@ -328,7 +374,8 @@
                 <td class="checkmark">✔</td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Monitor your validated domains for near real-time exposure on the dark web">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Monitor your validated domains for near real-time exposure on the dark web">
                     Dark Web Monitoring <i class="fa-solid fa-circle-info"></i>
                 </td>
                 <td></td>
@@ -337,7 +384,8 @@
                 <td class="checkmark">✔</td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Simulated phishing attacks, delivered directly to your users' inboxes via API">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Simulated phishing attacks, delivered directly to your users' inboxes via API">
                     Phishing Simulation + Catch-Phish <i class="fa-solid fa-circle-info"></i>
                 </td>
                 <td></td>
@@ -349,7 +397,8 @@
                 <td colspan="6">Assessments</td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Baseline Employee Cybersecurity Assessment">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Baseline Employee Cybersecurity Assessment">
                     BECA <i class="fa-solid fa-circle-info"></i>
                 </td>
                 <td class="checkmark">✔</td>
@@ -358,7 +407,8 @@
                 <td class="checkmark">✔</td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Pre-employment Cybersecurity Assessment">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Pre-employment Cybersecurity Assessment">
                     PECA <i class="fa-solid fa-circle-info"></i>
                 </td>
                 <td></td>
@@ -376,7 +426,8 @@
                 <td class="checkmark">✔</td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Annual assessment needed for cybersecurity insurance and some compliance frameworks">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Annual assessment needed for cybersecurity insurance and some compliance frameworks">
                     Security Risk <i class="fa-solid fa-circle-info"></i>
                 </td>
                 <td></td>
@@ -385,7 +436,8 @@
                 <td class="checkmark">✔</td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Custom assessment creation for your client companies">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Custom assessment creation for your client companies">
                     Assessment Builder <i class="fa-solid fa-circle-info"></i>
                 </td>
                 <td></td>
@@ -437,7 +489,8 @@
                 <td class="checkmark">✔</td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Ingest training reports into your CRM, PSA, or any no code platform">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Ingest training reports into your CRM, PSA, or any no code platform">
                     Reporting API <i class="fa-solid fa-circle-info"></i>
                 </td>
                 <td></td>
@@ -446,7 +499,8 @@
                 <td class="checkmark">✔</td>
             </tr>
             <tr>
-                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Research shows gamification and reinforcement are the drivers of learning">
+                <td class="sub-feature" data-bs-toggle="tooltip"
+                    data-bs-title="Research shows gamification and reinforcement are the drivers of learning">
                     Gamified Employee Security Score (ESS) <i class="fa-solid fa-circle-info"></i>
                 </td>
                 <td></td>
@@ -528,4 +582,5 @@
         updatePrices();
     </script>
 </body>
+
 </html>
