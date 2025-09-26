@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans with Feature Table</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e0e7ef 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a2b49;
+            margin-bottom: 1.5rem;
+        }
+
+        .toggle-container, .slider-container {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            justify-content: center;
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .pricing-card {
+            background: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 20%;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.25rem;
+            color: #1a2b49;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .price span {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #1a2b49 0%, #2c3e50 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #2c3e50 0%, #1a2b49 100%);
+        }
+
+        .form-range {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            max-width: 1400px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            margin-top: 2rem;
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .table th:first-child,
+        .table td:first-child {
+            text-align: left;
+        }
+
+        .table th {
+            background: linear-gradient(90deg, #1a2b49 0%, #2c3e50 100%);
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+
+        .feature-heading {
+            background-color: #e9ecef;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a2b49;
+            text-align: left;
+            border-bottom: 2px solid #ced4da;
+        }
+
+        .sub-feature {
+            padding-left: 2rem;
+            font-weight: 400;
+            font-size: 0.875rem;
+            background-color: #f8f9fa;
+        }
+
+        .table .checkmark {
+            color: #28a745;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .table tbody tr:hover:not(.feature-heading) {
+            background-color: #f1f3f5;
+        }
+
+        i[data-bs-toggle="tooltip"] {
+            background-color: #d4edda;
+            padding: 0.25rem;
+            border-radius: 50%;
+            cursor: help;
+        }
+
+        .tooltip-inner {
+            background-color: #1a2b49;
+            color: #fff;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+            max-width: 200px;
+            border-radius: 0.25rem;
+        }
+
+        .tooltip.bs-tooltip-top .tooltip-arrow::before {
+            border-top-color: #1a2b49;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .card-container {
+                flex-wrap: wrap;
+            }
+
+            .pricing-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .form-range {
+                width: 100%;
+            }
+
+            .table th,
+            .table td {
+                padding: 0.5rem;
+                font-size: 0.75rem;
+            }
+
+            .sub-feature {
+                padding-left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose Your Plan</h1>
+    <div class="toggle-container">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="billingToggle">
+            <label class="form-check-label" for="billingToggle">
+                <span id="billingLabel">Monthly Billing</span>
+            </label>
+        </div>
+    </div>
+    <div class="slider-container">
+        <label for="userSlider" class="form-label">Number of Users: <span id="userCount">100</span></label>
+        <input type="range" class="form-range" min="100" max="2000" value="100" id="userSlider">
+    </div>
+    <div class="card-container">
+        <div class="pricing-card">
+            <h3>Starter</h3>
+            <div class="price" id="starterPrice">$0 <span>/ month</span></div>
+            <button class="btn btn-primary">Select Plan</button>
+        </div>
+        <div class="pricing-card">
+            <h3>Basic</h3>
+            <div class="price" id="basicPrice">$100 <span>/ month</span></div>
+            <button class="btn btn-primary">Select Plan</button>
+        </div>
+        <div class="pricing-card">
+            <h3>Pro</h3>
+            <div class="price" id="proPrice">$175 <span>/ month</span></div>
+            <button class="btn btn-primary">Select Plan</button>
+        </div>
+        <div class="pricing-card">
+            <h3>Enterprise</h3>
+            <div class="price" id="enterprisePrice">$200 <span>/ month</span></div>
+            <button class="btn btn-primary">Select Plan</button>
+        </div>
+        <div class="pricing-card">
+            <h3>Custom Package</h3>
+            <div class="price" id="customPrice">$225 <span>/ month</span></div>
+            <button class="btn btn-primary">Contact Us</button>
+        </div>
+    </div>
+    <table class="comparison-table table table-bordered">
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Starter</th>
+                <th>Basic</th>
+                <th>Pro</th>
+                <th>Enterprise</th>
+                <th>Custom Package</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="feature-heading">
+                <td colspan="6">Training & Certification</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="80+ short, engaging training modules">
+                    Micro-Training <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Ultra-brief learning snippets">
+                    Nanos <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Refreshed every year with new information and adventures, follow Agent Coyle as he navigates the world of Cybersecurity threats">
+                    Annual Cybersecurity Certification <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td><i class="fa-solid fa-circle-info" data-bs-toggle="tooltip" data-bs-title="Training available without certification"></i></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Google, Microsoft, and more!">
+                    Productivity Certification <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td class="checkmark" data-bs-toggle="tooltip" data-bs-title="Boost productivity with Pro"><i class="fa-solid fa-circle-check"></i></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Training on AI tool usage">
+                    AI Certification <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="checkmark" data-bs-toggle="tooltip" data-bs-title="Exclusive AI training"><i class="fa-solid fa-circle-check"></i></td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Cybersecurity training with a HIPAA focus">
+                    HIPAA Certification <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr class="feature-heading">
+                <td colspan="6">Tools</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Search for compromised data">
+                    Dark Web Search <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Monitor your validated domains for near real-time exposure on the dark web">
+                    Dark Web Monitoring <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Simulated phishing attacks, delivered directly to your users' inboxes via API">
+                    Phishing Simulation + Catch-Phish <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr class="feature-heading">
+                <td colspan="6">Assessments</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Baseline Employee Cybersecurity Assessment">
+                    BECA <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Pre-employment Cybersecurity Assessment">
+                    PECA <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="AI Readiness Assessment">
+                    AIRIA <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Annual assessment needed for cybersecurity insurance and some compliance frameworks">
+                    Security Risk <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Custom assessment creation for your client companies">
+                    Assessment Builder <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr class="feature-heading">
+                <td colspan="6">Administration</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Train inside your everyday tools">
+                    Teams Integration <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Entra / Google / Okta">
+                    SSO <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Entra / Google">
+                    SCIM User Provisioning <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Granular control of Admin capabilities">
+                    Role-Based Access Controls <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Customizable org hierarchy designed for larger organizations with multiple levels of management and reporting">
+                    Flexible Org Structure <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr class="feature-heading">
+                <td colspan="6">Other Features</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Automate training enrollment">
+                    Management API <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Ingest training reports into your CRM, PSA, or any no code platform">
+                    Reporting API <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Research shows gamification and reinforcement are the drivers of learning">
+                    Gamified Employee Security Score (ESS) <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Per-user phishing outcome reporting">
+                    Phish Simulation Reporting <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+                <td class="sub-feature" data-bs-toggle="tooltip" data-bs-title="Auto-assigned remediation training">
+                    Phish Remediation <i class="fa-solid fa-circle-info"></i>
+                </td>
+                <td></td>
+                <td></td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+                <td class="checkmark">✔</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Bootstrap JS and Popper.js for tooltips -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        // Initialize Bootstrap tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        // Pricing data (per user, monthly and yearly)
+        const pricing = {
+            starter: { monthly: 0, yearly: 0 },
+            basic: { monthly: 1, yearly: 1 * 12 * 0.9 }, // 10% discount for yearly
+            pro: { monthly: 1.75, yearly: 1.75 * 12 * 0.9 },
+            enterprise: { monthly: 2, yearly: 2 * 12 * 0.9 },
+            custom: { monthly: 2.25, yearly: 2.25 * 12 * 0.9 }
+        };
+
+        // Elements
+        const billingToggle = document.getElementById('billingToggle');
+        const billingLabel = document.getElementById('billingLabel');
+        const userSlider = document.getElementById('userSlider');
+        const userCount = document.getElementById('userCount');
+        const priceElements = {
+            starter: document.getElementById('starterPrice'),
+            basic: document.getElementById('basicPrice'),
+            pro: document.getElementById('proPrice'),
+            enterprise: document.getElementById('enterprisePrice'),
+            custom: document.getElementById('customPrice')
+        };
+
+        // Update prices based on user count and billing cycle
+        function updatePrices() {
+            const users = parseInt(userSlider.value);
+            const isYearly = billingToggle.checked;
+            userCount.textContent = users;
+            billingLabel.textContent = isYearly ? 'Yearly Billing' : 'Monthly Billing';
+
+            for (const plan in pricing) {
+                const price = isYearly ? pricing[plan].yearly * users : pricing[plan].monthly * users;
+                const period = isYearly ? 'year' : 'month';
+                priceElements[plan].innerHTML = `$${Math.round(price)} <span>/ ${period}</span>`;
+            }
+        }
+
+        // Event listeners
+        billingToggle.addEventListener('change', updatePrices);
+        userSlider.addEventListener('input', updatePrices);
+
+        // Initial price update
+        updatePrices();
+    </script>
+</body>
+</html>
